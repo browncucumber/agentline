@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentLine 24/7 | AI Real Estate Phone Assistant | Never Miss a Call</title>
+<meta name="description" content="Your 24/7 AI phone assistant answers every call, qualifies buyers, and books showings directly into your calendar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1A2F;
+    --navy-mid: #0F2444;
+    --navy-light: #162D52;
+    --sky: #3FA9F5;
+    --sky-light: #6EC0F8;
+    --sky-dark: #1A87D4;
+    --white: #FFFFFF;
+    --gray: #F4F4F4;
+    --gray-mid: #E2E8F0;
+    --gray-text: #94A3B8;
+    --green: #2ECC71;
+    --green-dark: #27AE60;
+    --text-body: #CBD5E1;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 5%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10, 26, 47, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(63, 169, 245, 0.12);
+    transition: all 0.3s;
+  }
+
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--sky); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-body);
+    transition: color 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .nav-links a:hover { color: var(--sky); }
+
+  .nav-cta {
+    background: var(--sky);
+    color: var(--navy) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 700 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--sky-light) !important; color: var(--navy) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 5% 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(63, 169, 245, 0.13) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(46, 204, 113, 0.07) 0%, transparent 50%),
+      linear-gradient(160deg, #0A1A2F 0%, #0D2040 50%, #091828 100%);
+    z-index: 0;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(63,169,245,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(63,169,245,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: float 8s ease-in-out infinite;
+    z-index: 0;
+  }
+  .orb-1 { width: 400px; height: 400px; background: rgba(63,169,245,0.08); top: -100px; right: 10%; animation-delay: 0s; }
+  .orb-2 { width: 300px; height: 300px; background: rgba(46,204,113,0.06); bottom: 10%; left: 5%; animation-delay: 3s; }
+  .orb-3 { width: 200px; height: 200px; background: rgba(63,169,245,0.1); top: 40%; right: 25%; animation-delay: 5s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(63,169,245,0.12);
+    border: 1px solid rgba(63,169,245,0.3);
+    color: var(--sky);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--sky), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--text-body);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--sky), var(--sky-dark));
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(63,169,245,0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(63,169,245,0.5);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .btn-secondary:hover {
+    border-color: var(--sky);
+    color: var(--sky);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+  }
+
+  .stat-item {}
+  .stat-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--sky);
+    letter-spacing: -1px;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--gray-text);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  /* Phone mockup on right */
+  .hero-visual {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .phone-card {
+    width: 320px;
+    background: var(--navy-light);
+    border: 1px solid rgba(63,169,245,0.2);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(63,169,245,0.1);
+  }
+
+  .phone-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .phone-avatar {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--sky), var(--green));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .phone-info h4 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .phone-info p {
+    font-size: 0.72rem;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  .call-wave {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 30px;
+    margin-bottom: 1rem;
+  }
+  .wave-bar {
+    width: 4px;
+    background: var(--sky);
+    border-radius: 2px;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+  .wave-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+  .wave-bar:nth-child(2) { height: 18px; animation-delay: 0.15s; }
+  .wave-bar:nth-child(3) { height: 24px; animation-delay: 0.3s; }
+  .wave-bar:nth-child(4) { height: 16px; animation-delay: 0.45s; }
+  .wave-bar:nth-child(5) { height: 28px; animation-delay: 0.6s; }
+  .wave-bar:nth-child(6) { height: 20px; animation-delay: 0.75s; }
+  .wave-bar:nth-child(7) { height: 12px; animation-delay: 0.9s; }
+  .wave-bar:nth-child(8) { height: 22px; animation-delay: 1.05s; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  .chat-bubbles { display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .bubble {
+    padding: 0.6rem 0.9rem;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    max-width: 90%;
+  }
+  .bubble-ai {
+    background: rgba(63,169,245,0.15);
+    border: 1px solid rgba(63,169,245,0.2);
+    color: var(--white);
+    align-self: flex-start;
+  }
+  .bubble-user {
+    background: rgba(46,204,113,0.12);
+    border: 1px solid rgba(46,204,113,0.2);
+    color: var(--white);
+    align-self: flex-end;
+  }
+
+  .phone-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .showing-tag {
+    background: rgba(46,204,113,0.15);
+    border: 1px solid rgba(46,204,113,0.3);
+    color: var(--green);
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .time-tag {
+    font-size: 0.72rem;
+    color: var(--gray-text);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 100px 5%;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text-body);
+    line-height: 1.75;
+    max-width: 560px;
+  }
+
+  .text-center { text-align: center; }
+  .text-center .section-sub { margin: 0 auto; }
+
+  /* ── WHY AGENTS LOVE THIS ── */
+  .features-section {
+    background: linear-gradient(160deg, var(--navy-mid) 0%, var(--navy) 100%);
+    border-top: 1px solid rgba(63,169,245,0.1);
+    border-bottom: 1px solid rgba(63,169,245,0.1);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .feature-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sky), var(--green));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .feature-card:hover {
+    border-color: rgba(63,169,245,0.25);
+    background: rgba(63,169,245,0.05);
+    transform: translateY(-4px);
+  }
+  .feature-card:hover::before { transform: scaleX(1); }
+
+  .feature-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, rgba(63,169,245,0.15), rgba(63,169,245,0.05));
+    border: 1px solid rgba(63,169,245,0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .feature-card p {
+    font-size: 0.87rem;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps-section {}
+
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 3.5rem;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.3s;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-item:hover .step-number { background: linear-gradient(135deg, var(--sky), var(--sky-dark)); color: var(--white); }
+
+  .step-number {
+    min-width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(63,169,245,0.08);
+    border: 1px solid rgba(63,169,245,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--sky);
+    transition: all 0.3s;
+  }
+
+  .step-content h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+
+  /* ── PRICING ── */
+  .pricing-section {
+    background: linear-gradient(160deg, var(--navy-mid) 0%, var(--navy) 100%);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    align-items: start;
+  }
+
+  .pricing-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+  .pricing-card:hover {
+    border-color: rgba(63,169,245,0.3);
+    transform: translateY(-6px);
+  }
+  .pricing-card.featured {
+    background: linear-gradient(145deg, rgba(63,169,245,0.1), rgba(63,169,245,0.04));
+    border-color: rgba(63,169,245,0.4);
+    transform: scale(1.03);
+    box-shadow: 0 20px 60px rgba(63,169,245,0.15);
+  }
+  .pricing-card.featured:hover { transform: scale(1.03) translateY(-6px); }
+
+  .plan-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--sky), var(--sky-dark));
+    color: var(--white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+  }
+
+  .plan-name {
+    font-size: 1.2rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0.5rem;
+  }
+
+  .plan-price {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 1.5rem;
+  }
+  .plan-price .amount {
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+  }
+  .plan-price .per {
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    font-weight: 600;
+  }
+
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.88rem;
+    color: var(--text-body);
+  }
+
+  .check {
+    width: 18px; height: 18px;
+    background: rgba(46,204,113,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    font-size: 0.65rem;
+    flex-shrink: 0;
+  }
+
+  .btn-plan {
+    width: 100%;
+    padding: 0.85rem;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    border: none;
+    letter-spacing: 0.3px;
+  }
+  .btn-plan-outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: var(--white);
+  }
+  .btn-plan-outline:hover { border-color: var(--sky); color: var(--sky); }
+  .btn-plan-primary {
+    background: linear-gradient(135deg, var(--sky), var(--sky-dark));
+    color: var(--white);
+    box-shadow: 0 4px 20px rgba(63,169,245,0.4);
+  }
+  .btn-plan-primary:hover { box-shadow: 0 8px 30px rgba(63,169,245,0.55); transform: translateY(-1px); }
+
+  /* ── FAQ ── */
+  .faq-section {}
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 640px) { .faq-grid { grid-template-columns: 1fr; } }
+
+  .faq-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .faq-item:hover {
+    border-color: rgba(63,169,245,0.25);
+    background: rgba(63,169,245,0.04);
+  }
+
+  .faq-item h4 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0.6rem;
+    color: var(--white);
+  }
+
+  .faq-item p {
+    font-size: 0.84rem;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  /* ── DEMO ── */
+  .demo-section {
+    background: linear-gradient(160deg, var(--navy-mid) 0%, var(--navy) 100%);
+  }
+
+  .demo-video-placeholder {
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 16/9;
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(63,169,245,0.25);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 3rem auto 0;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .demo-video-placeholder:hover {
+    background: rgba(63,169,245,0.05);
+    border-color: rgba(63,169,245,0.45);
+  }
+
+  .play-btn {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, var(--sky), var(--sky-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 0 40px rgba(63,169,245,0.4);
+    transition: all 0.3s;
+  }
+  .demo-video-placeholder:hover .play-btn { transform: scale(1.1); box-shadow: 0 0 60px rgba(63,169,245,0.55); }
+
+  .demo-video-placeholder p {
+    font-size: 0.9rem;
+    color: var(--gray-text);
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* ── ABOUT ── */
+  .about-section {}
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .founder-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .founder-avatar {
+    width: 90px; height: 90px;
+    background: linear-gradient(135deg, var(--sky), var(--sky-dark));
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white);
+  }
+
+  .founder-card h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0.3rem;
+  }
+
+  .founder-card .role {
+    font-size: 0.82rem;
+    color: var(--sky);
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: linear-gradient(160deg, var(--navy-mid) 0%, var(--navy) 100%);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    margin-top: 3.5rem;
+  }
+
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+
+  .contact-info h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .contact-icon {
+    width: 38px; height: 38px;
+    background: rgba(63,169,245,0.1);
+    border: 1px solid rgba(63,169,245,0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-item p { font-size: 0.88rem; color: var(--text-body); }
+  .contact-item strong { color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 0.82rem; display: block; margin-bottom: 2px; }
+
+  .form-group { margin-bottom: 1.1rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--gray-text);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--sky);
+    background: rgba(63,169,245,0.05);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.2);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 110px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ── CTA BANNER ── */
+  .cta-section {
+    padding: 80px 5%;
+    background: linear-gradient(135deg, rgba(63,169,245,0.12), rgba(46,204,113,0.08));
+    border-top: 1px solid rgba(63,169,245,0.15);
+    border-bottom: 1px solid rgba(63,169,245,0.15);
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1rem;
+    color: var(--text-body);
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060E1B;
+    padding: 60px 5% 30px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+
+  .footer-brand p {
+    font-size: 0.87rem;
+    color: var(--gray-text);
+    line-height: 1.7;
+    margin-top: 0.75rem;
+    max-width: 260px;
+  }
+
+  .footer-col h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-text);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.65rem; }
+  .footer-col ul li a {
+    font-size: 0.87rem;
+    color: rgba(255,255,255,0.5);
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--sky); }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  .footer-bottom p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonial-section {
+    background: var(--navy);
+    overflow: hidden;
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  @media (max-width: 768px) { .testimonial-grid { grid-template-columns: 1fr; } }
+
+  .testimonial-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.3s;
+  }
+  .testimonial-card:hover {
+    border-color: rgba(63,169,245,0.2);
+  }
+
+  .stars { color: #F5A623; font-size: 0.85rem; margin-bottom: 0.9rem; letter-spacing: 2px; }
+
+  .testimonial-card p {
+    font-size: 0.9rem;
+    color: var(--text-body);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+
+  .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .reviewer-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sky-dark), var(--sky));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .reviewer-info strong {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: block;
+  }
+  .reviewer-info span { font-size: 0.75rem; color: var(--gray-text); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .hero-visual { display: none; }
+    .hero-content { max-width: 100%; }
+  }
+  @media (max-width: 640px) {
+    nav .nav-links { display: none; }
+    .hero-ctas { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    .hero-stats { gap: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: none; }
+  }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav>
+  <div class="logo">Agent<span>Line</span> 24/7</div>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#pricing" class="nav-cta">Start Free Trial</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-content">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      AI Phone Assistant for Real Estate
+    </div>
+    <h1>Never Miss a <span class="highlight">Buyer Call</span> Again</h1>
+    <p>Your 24/7 AI phone assistant answers every call, qualifies buyers, and books showings directly into your calendar — while you focus on closing deals.</p>
+    <div class="hero-ctas">
+      <a href="#pricing" class="btn-primary">
+        ▶&nbsp; Start Free 7-Day Trial
+      </a>
+      <a href="#demo" class="btn-secondary">
+        ◎&nbsp; Watch Demo
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Availability</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Calls Answered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">&lt;2s</div>
+        <div class="stat-label">Response Time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$0</div>
+        <div class="stat-label">Setup Fee</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone mockup -->
+  <div class="hero-visual">
+    <div class="phone-card">
+      <div class="phone-header">
+        <div class="phone-avatar">🤖</div>
+        <div class="phone-info">
+          <h4>AgentLine AI</h4>
+          <p>● Live — Answering Now</p>
+        </div>
+      </div>
+      <div class="call-wave">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+      </div>
+      <div class="chat-bubbles">
+        <div class="bubble bubble-ai">Hi! Thanks for calling about 123 Oak Street. I'm your AI assistant — how can I help you today?</div>
+        <div class="bubble bubble-user">I'd love to schedule a showing this Saturday.</div>
+        <div class="bubble bubble-ai">Perfect! I have Saturday at 2pm or 4pm available. Which works best for you?</div>
+      </div>
+      <div class="phone-footer">
+        <span class="showing-tag">✓ Showing Booked</span>
+        <span class="time-tag">Sat, 2:00 PM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY AGENTS LOVE THIS ══ -->
+<section class="features-section" id="features">
+  <div class="text-center reveal">
+    <div class="section-label">Why Choose AgentLine</div>
+    <h2 class="section-title">Why Agents Love This</h2>
+    <p class="section-sub">Stop losing qualified buyers to voicemail. Your AI assistant handles everything, around the clock.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">📞</div>
+      <h3>Answers Every Call Instantly</h3>
+      <p>No more missed opportunities. Every incoming call is answered within seconds, no matter the hour.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">📅</div>
+      <h3>Books Showings Automatically</h3>
+      <p>Your AI syncs with your calendar and confirms showings on the spot — no back-and-forth needed.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏠</div>
+      <h3>Handles Property Questions</h3>
+      <p>Buyers get instant answers about square footage, pricing, features, and availability — pulled directly from your listing.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">📊</div>
+      <h3>Sends Daily Lead Summaries</h3>
+      <p>Wake up to a clean report of every caller, their questions, and any bookings made while you were off the clock.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🌙</div>
+      <h3>Works 24/7 — Even Holidays</h3>
+      <p>Buyers browse listings at 11pm and on weekends. Your AI is always on, ensuring zero missed opportunities.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎯</div>
+      <h3>No Missed Opportunities</h3>
+      <p>Every qualified buyer gets attended to. Stop losing deals simply because you couldn't pick up the phone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how-it-works">
+  <div class="text-center reveal">
+    <div class="section-label">The Process</div>
+    <h2 class="section-title">Your AI Listing Assistant Works in 5 Simple Steps</h2>
+    <p class="section-sub">Set up in minutes. Qualify leads and book showings forever.</p>
+  </div>
+  <div class="steps-container">
+    <div class="step-item reveal">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <h3>You Send the Listing</h3>
+        <p>Paste your Zillow or MLS link. That's it. We take it from there and extract every relevant detail from your listing.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <h3>We Build Your AI Agent</h3>
+        <p>We extract all property details and create a custom AI voice assistant trained specifically on your listing — pricing, features, availability, and more.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <h3>You Get a Dedicated Phone Number</h3>
+        <p>Add it to your listing, yard sign, flyers, or any marketing material. Buyers call this number and reach your AI instantly.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <h3>AI Answers Every Call</h3>
+        <p>Your assistant handles questions, collects caller contact info, qualifies intent, and books showings — all without any involvement from you.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-number">05</div>
+      <div class="step-content">
+        <h3>You Receive Qualified Leads Daily</h3>
+        <p>Every morning you get a summary of calls, qualified buyers, and calendar events for booked showings. Just show up and close.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEMO ══ -->
+<section class="demo-section" id="demo">
+  <div class="text-center reveal">
+    <div class="section-label">See It Live</div>
+    <h2 class="section-title">See the AI Assistant in Action</h2>
+    <p class="section-sub">Watch how AgentLine answers a real buyer inquiry and books a showing automatically in under 2 minutes.</p>
+  </div>
+  <div class="demo-video-placeholder reveal">
+    <div class="play-btn">▶</div>
+    <p>Embed Your Loom Demo Video Here</p>
+  </div>
+  <div style="text-align:center; margin-top: 2.5rem;" class="reveal">
+    <a href="#pricing" class="btn-primary">Start Your Free Trial</a>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section id="pricing">
+  <div class="text-center reveal">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Simple, Transparent Pricing</h2>
+    <p class="section-sub">No setup fees. No contracts. Cancel anytime. Start with a free 7-day trial on any plan.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <p class="plan-name">Starter</p>
+      <div class="plan-price">
+        <span class="amount">$297</span>
+        <span class="per">/month</span>
+      </div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> 1–2 Listings</li>
+        <li><span class="check">✓</span> 1 AI Phone Number</li>
+        <li><span class="check">✓</span> Unlimited Minutes</li>
+        <li><span class="check">✓</span> Daily Lead Summaries</li>
+        <li><span class="check">✓</span> Calendar Booking</li>
+      </ul>
+      <button class="btn-plan btn-plan-outline">Start Free Trial</button>
+    </div>
+    <div class="pricing-card featured reveal">
+      <div class="plan-badge">Most Popular</div>
+      <p class="plan-name">Pro</p>
+      <div class="plan-price">
+        <span class="amount">$397</span>
+        <span class="per">/month</span>
+      </div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Up to 3 Listings</li>
+        <li><span class="check">✓</span> 3 AI Phone Numbers</li>
+        <li><span class="check">✓</span> Unlimited Minutes</li>
+        <li><span class="check">✓</span> Daily Lead Summaries</li>
+        <li><span class="check">✓</span> Lead Tagging</li>
+        <li><span class="check">✓</span> Priority Support</li>
+      </ul>
+      <button class="btn-plan btn-plan-primary">Start Free Trial</button>
+    </div>
+    <div class="pricing-card reveal">
+      <p class="plan-name">Team</p>
+      <div class="plan-price">
+        <span class="amount">$497</span>
+        <span class="per">/month</span>
+      </div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Up to 5 Listings</li>
+        <li><span class="check">✓</span> CRM Integration</li>
+        <li><span class="check">✓</span> Automated Follow-Ups</li>
+        <li><span class="check">✓</span> Weekly Performance Reports</li>
+        <li><span class="check">✓</span> Priority Support</li>
+      </ul>
+      <button class="btn-plan btn-plan-outline">Start Free Trial</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="testimonial-section">
+  <div class="text-center reveal">
+    <div class="section-label">Social Proof</div>
+    <h2 class="section-title">What Agents Are Saying</h2>
+    <p class="section-sub">Join agents who have stopped missing buyer calls forever.</p>
+  </div>
+  <div class="testimonial-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>"Insert your first client testimonial here. Describe how AgentLine helped them book more showings and never miss a call."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">JR</div>
+        <div class="reviewer-info">
+          <strong>Jane R.</strong>
+          <span>Real Estate Agent, Miami</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>"Add your second client review here. Mention specific results like number of showings booked or leads captured automatically."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">MT</div>
+        <div class="reviewer-info">
+          <strong>Mike T.</strong>
+          <span>Listing Agent, Austin</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>"A third testimonial from a satisfied client goes here. Highlight 24/7 coverage, ease of setup, or time saved every week."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">SL</div>
+        <div class="reviewer-info">
+          <strong>Sarah L.</strong>
+          <span>Buyer's Agent, Chicago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Built for Agents Who Want to Close More Deals</h2>
+      <p style="color: var(--text-body); line-height: 1.8; margin-top: 1.5rem; font-size: 0.97rem;">I built AgentLine after watching agents lose qualified buyers simply because they couldn't answer every call. With AI voice technology, agents can now offer 24/7 availability without hiring staff, expanding their reach without increasing overhead.</p>
+      <p style="color: var(--text-body); line-height: 1.8; margin-top: 1rem; font-size: 0.97rem;">Our mission is simple: <strong style="color:var(--white);">help real estate agents capture every opportunity and eliminate missed calls forever.</strong> Every buyer who calls deserves an instant answer. Every agent deserves to close more deals.</p>
+      <div style="margin-top: 2rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        <div>
+          <div style="font-family: Montserrat; font-size: 1.5rem; font-weight:900; color: var(--sky);">100%</div>
+          <div style="font-size: 0.78rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.5px; font-weight:600;">Calls Captured</div>
+        </div>
+        <div>
+          <div style="font-family: Montserrat; font-size: 1.5rem; font-weight:900; color: var(--sky);">5 min</div>
+          <div style="font-size: 0.78rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.5px; font-weight:600;">Avg Setup Time</div>
+        </div>
+        <div>
+          <div style="font-family: Montserrat; font-size: 1.5rem; font-weight:900; color: var(--sky);">24/7</div>
+          <div style="font-size: 0.78rem; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.5px; font-weight:600;">Always On</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="founder-card">
+        <div class="founder-avatar">D</div>
+        <h3>Dmitri</h3>
+        <p class="role">Founder & CEO</p>
+        <p style="font-size: 0.88rem; color: var(--text-body); margin-top: 1rem; line-height: 1.7;">"I built this service after seeing how many agents lose qualified buyers simply because they can't answer every call. Now, no agent has to miss another opportunity."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="faq-section" id="faq" style="background: linear-gradient(160deg, var(--navy-mid) 0%, var(--navy) 100%);">
+  <div class="text-center reveal">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-sub">Everything you need to know before getting started.</p>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item reveal">
+      <h4>How accurate is the AI?</h4>
+      <p>Our AI is trained directly from your listing data, making it highly accurate for property-specific questions. It answers based on real facts from your MLS or Zillow link.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>Does it actually book showings?</h4>
+      <p>Yes. The AI syncs with your Google Calendar, checks availability in real time, and confirms bookings with callers automatically — no manual input required.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>Can it answer property questions?</h4>
+      <p>Absolutely. Pricing, square footage, bedroom count, open house dates, HOA info — it handles all standard buyer inquiries without you lifting a finger.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>Does it work with Zillow listings?</h4>
+      <p>Yes. Simply paste your Zillow or MLS listing URL and we extract all the property information needed to train your custom AI assistant.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>How do I start the free trial?</h4>
+      <p>Click any "Start Free Trial" button, choose your plan, and follow the setup steps. You'll be live with your AI number within minutes.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>What happens after the trial?</h4>
+      <p>You'll be automatically billed at your plan's monthly rate unless you cancel before the trial ends. No hidden fees, no setup charges.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>Is my data secure?</h4>
+      <p>Yes. All call data is processed through enterprise-grade AI infrastructure with encryption at rest and in transit. We never sell or share your data.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>Can I add multiple listings?</h4>
+      <p>Yes — each plan supports multiple listings. Starter handles 1–2, Pro handles up to 3, and Team handles up to 5 active listings simultaneously.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>Does it integrate with Google Calendar?</h4>
+      <p>Yes. Google Calendar integration is included on all plans. The AI checks your real-time availability and adds booked showings automatically.</p>
+    </div>
+    <div class="faq-item reveal">
+      <h4>How fast can I get set up?</h4>
+      <p>Most agents are fully live in under 5 minutes. Paste your listing link, connect your calendar, and your AI number is ready to share immediately.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="contact-section" id="contact">
+  <div class="text-center reveal">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-sub">Have a question or need help getting set up? We'd love to hear from you.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Contact Information</h3>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <strong>Email</strong>
+          <p>support@yourdomain.com</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <strong>Business Hours</strong>
+          <p>Mon–Sat: 9am–6pm EST</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⚡</div>
+        <div>
+          <strong>Response Time</strong>
+          <p>We reply within a few hours during business hours</p>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Jane Smith">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="+1 (555) 000-0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your listings and what you're looking for..."></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%; justify-content:center;">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BANNER ══ -->
+<section class="cta-section reveal">
+  <div class="section-label" style="margin-bottom:0.75rem;">Get Started Today</div>
+  <h2>Ready to <span style="color:var(--sky);">Never Miss</span> Another Buyer?</h2>
+  <p>Join agents who have transformed their listings with 24/7 AI coverage. Try it free for 7 days — no card required to start.</p>
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+    <a href="#pricing" class="btn-primary">▶&nbsp; Start Free 7-Day Trial</a>
+    <a href="#demo" class="btn-secondary">Watch Demo</a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Agent<span>Line</span> 24/7</div>
+      <p>Your 24/7 AI phone assistant answers every call, qualifies buyers, and books showings — automatically.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#features">Features</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 AgentLine 24/7. All rights reserved.</p>
+    <p>support@yourdomain.com</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(10, 26, 47, 0.98)';
+      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
+    } else {
+      nav.style.background = 'rgba(10, 26, 47, 0.92)';
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+</body>
+</html>
